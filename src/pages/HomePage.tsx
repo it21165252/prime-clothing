@@ -9,8 +9,9 @@ import { ArrowRight, ChevronLeft, ChevronRight, ReturnIcon, ShieldIcon, TruckIco
 import { FREE_DELIVERY_THRESHOLD, formatLKR } from '../lib/format';
 
 const CATEGORY_TILES = [
-  { to: '/collections/men', label: 'Men', image: LIFESTYLE.men },
-  { to: '/collections/women', label: 'Women', image: LIFESTYLE.women },
+  { to: '/collections/tees', label: 'Tees', image: LIFESTYLE.tees },
+  { to: '/collections/hoodies', label: 'Hoodies', image: LIFESTYLE.hoodies },
+  { to: '/collections/jackets', label: 'Jackets', image: LIFESTYLE.jackets },
   { to: '/collections/riding-gear', label: 'Riding Gear', image: LIFESTYLE.ridingGear },
   { to: '/collections/accessories', label: 'Accessories', image: LIFESTYLE.accessories },
 ];
@@ -64,16 +65,20 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative h-[calc(100svh-100px)] min-h-[520px] max-h-[900px] overflow-hidden bg-ink">
-        <motion.img
-          src={LIFESTYLE.hero}
-          srcSet={`${LIFESTYLE.heroMobile} 1000w, ${LIFESTYLE.hero} 2000w`}
-          sizes="100vw"
-          alt="Rider with a black motorcycle"
-          className="absolute inset-0 w-full h-full object-cover"
-          initial={reduce ? false : { scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-        />
+        <picture>
+          <source media="(max-width: 767px)" srcSet={LIFESTYLE.heroMobile} type="image/webp" />
+          <source media="(max-width: 767px)" srcSet={LIFESTYLE.heroMobileJpg} type="image/jpeg" />
+          <source srcSet={LIFESTYLE.hero} type="image/webp" />
+          <motion.img
+            src={LIFESTYLE.heroJpg}
+            alt={LIFESTYLE.heroAlt}
+            fetchPriority="high"
+            className="absolute inset-0 w-full h-full object-cover object-[center_10%] md:object-[72%_0%]"
+            initial={reduce ? false : { scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
         <div className="relative h-full mx-auto max-w-[1600px] px-4 md:px-8 flex flex-col justify-end pb-14 md:pb-20">
@@ -96,15 +101,23 @@ export default function HomePage() {
 
       {/* Category tiles */}
       <section className="mx-auto max-w-[1600px] px-4 md:px-8 pt-14 md:pt-20">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
           {CATEGORY_TILES.map((t, i) => (
-            <Reveal key={t.to} delay={i * 0.06}>
-              <Link to={t.to} className="group relative block aspect-[3/4] overflow-hidden bg-mist">
-                <img src={t.image} alt={t.label} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 flex items-end justify-between text-white">
-                  <span className="font-display text-3xl md:text-5xl font-extrabold">{t.label}</span>
-                  <ArrowRight size={20} className="mb-1 transition-transform group-hover:translate-x-1" />
+            <Reveal key={t.to} delay={i * 0.06} className={i === 0 ? 'col-span-2 md:col-span-1' : undefined}>
+              <Link to={t.to} className={`group relative block overflow-hidden bg-mist ${i === 0 ? 'aspect-[16/10] md:aspect-[3/4]' : 'aspect-[3/4]'}`}>
+                <picture>
+                  <source srcSet={t.image.webp} type="image/webp" />
+                  <img
+                    src={t.image.jpg}
+                    alt={t.image.alt}
+                    loading="lazy"
+                    className={`absolute inset-0 w-full h-full object-cover ${t.image.position} transition-transform duration-700 group-hover:scale-105`}
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 flex items-end justify-between gap-3 text-white">
+                  <span className="min-w-0 font-display text-2xl md:text-3xl xl:text-4xl leading-[0.95] font-extrabold">{t.label}</span>
+                  <ArrowRight size={20} className="mb-1 shrink-0 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
             </Reveal>
@@ -123,7 +136,10 @@ export default function HomePage() {
       {/* Split lifestyle banner */}
       <section className="mt-16 md:mt-24 grid lg:grid-cols-2 bg-ink text-white">
         <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[640px] overflow-hidden">
-          <img src={LIFESTYLE.ride} alt="Rider at sunset" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+          <picture>
+            <source srcSet={LIFESTYLE.ride} type="image/webp" />
+            <img src={LIFESTYLE.rideJpg} alt={LIFESTYLE.rideAlt} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[42%_60%]" />
+          </picture>
         </div>
         <div className="flex items-center px-6 py-14 md:px-16 lg:px-20">
           <Reveal>
@@ -172,7 +188,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-black/35" />
           <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-6">
             <p className="label mb-4">Prime Racing x Prime Clothing</p>
-            <h2 className="font-display text-5xl md:text-8xl font-extrabold">Ride the extraordinary</h2>
+            <h2 className="font-display text-5xl md:text-8xl font-extrabold">Dressed for the ride</h2>
             <span className="btn btn-white mt-8">Shop All</span>
           </div>
         </Link>

@@ -29,7 +29,7 @@ const PRICE_BANDS = [
   { key: 'o25', label: 'Over LKR 25,000', test: (p: number) => p > 25000 },
 ];
 
-const SIZE_ORDER = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '28', '30', '32', '34', '36', '38', 'One Size'];
+const SIZE_ORDER = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'One Size'];
 
 type Filters = { categories: string[]; sizes: string[]; colours: string[]; prices: string[] };
 const EMPTY: Filters = { categories: [], sizes: [], colours: [], prices: [] };

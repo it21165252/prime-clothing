@@ -9,9 +9,11 @@ import { searchProducts } from '../data/products';
 import { formatLKR } from '../lib/format';
 
 const NAV_LINKS = [
+  { to: '/collections/all', label: 'Shop All' },
   { to: '/collections/new-in', label: 'New In' },
-  { to: '/collections/men', label: 'Men' },
-  { to: '/collections/women', label: 'Women' },
+  { to: '/collections/tees', label: 'Tees' },
+  { to: '/collections/hoodies', label: 'Hoodies' },
+  { to: '/collections/jackets', label: 'Jackets' },
   { to: '/collections/riding-gear', label: 'Riding Gear' },
   { to: '/collections/accessories', label: 'Accessories' },
 ];
@@ -127,10 +129,6 @@ function MobileMenu({ open, onClose, signedIn }: { open: boolean; onClose: () =>
                   <ArrowRight size={18} />
                 </Link>
               ))}
-              <Link to="/collections/all" className="flex items-center justify-between py-4 border-b border-neutral-100 font-display text-3xl font-bold">
-                Shop All
-                <ArrowRight size={18} />
-              </Link>
               <div className="mt-6 space-y-3">
                 <Link to={signedIn ? '/account' : '/account/login'} className="label block">{signedIn ? 'My Account' : 'Sign In / Join'}</Link>
                 <Link to="/pages/delivery" className="label block text-neutral-500">Delivery</Link>

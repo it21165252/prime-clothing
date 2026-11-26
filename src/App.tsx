@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
@@ -30,6 +30,9 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/collections" element={<CollectionPage />} />
+              {/* Old gender collections were removed; send any stale links to Shop All. */}
+              <Route path="/collections/men" element={<Navigate to="/collections/all" replace />} />
+              <Route path="/collections/women" element={<Navigate to="/collections/all" replace />} />
               <Route path="/collections/:handle" element={<CollectionPage />} />
               <Route path="/search" element={<CollectionPage mode="search" />} />
               <Route path="/products/:slug" element={<ProductPage />} />

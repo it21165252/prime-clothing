@@ -10,9 +10,12 @@ const COLUMNS = [
   {
     title: 'Shop',
     links: [
+      { to: '/collections/all', label: 'Shop All' },
       { to: '/collections/new-in', label: 'New In' },
-      { to: '/collections/men', label: 'Men' },
-      { to: '/collections/women', label: 'Women' },
+      { to: '/collections/tees', label: 'Tees' },
+      { to: '/collections/hoodies', label: 'Hoodies & Sweats' },
+      { to: '/collections/jackets', label: 'Jackets' },
+      { to: '/collections/pants', label: 'Pants' },
       { to: '/collections/riding-gear', label: 'Riding Gear' },
       { to: '/collections/accessories', label: 'Accessories' },
     ],
