@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useIntro } from '../contexts/IntroContext';
 import { Logo } from './Logo';
 import { BagIcon, CloseIcon, MenuIcon, SearchIcon, UserIcon, ArrowRight } from './Icons';
 import { searchProducts } from '../data/products';
@@ -21,6 +22,7 @@ const NAV_LINKS = [
 export function Header() {
   const { itemCount, openDrawer } = useCart();
   const { customer } = useAuth();
+  const { ready, headerLogoRef } = useIntro();
   const location = useLocation();
   // Overlays remember which route they were opened on, so navigating closes them.
   const routeKey = location.pathname + location.search;
@@ -60,7 +62,8 @@ export function Header() {
           </div>
 
           <Link to="/" className="justify-self-center lg:justify-self-start" aria-label="Prime Clothing home">
-            <Logo className="h-7 md:h-8" />
+            {/* Hidden (space kept) until the intro loader logo lands here. */}
+            <Logo className="h-7 md:h-8" imgRef={headerLogoRef} style={{ opacity: ready ? 1 : 0 }} />
           </Link>
 
           <nav className="hidden lg:flex items-center justify-center gap-8" aria-label="Main">
