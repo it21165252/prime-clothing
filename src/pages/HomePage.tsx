@@ -167,7 +167,7 @@ export default function HomePage() {
 
           <motion.div className="flex flex-wrap gap-3 mt-8" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}>
             <motion.div variants={fadeUp}>
-              <Link to="/collections/new-in" className="group btn btn-wipe bg-white text-ink [--wipe:#e10600] hover:text-white">
+              <Link to="/collections/all" className="group btn btn-wipe bg-white text-ink [--wipe:#e10600] hover:text-white">
                 <span>Shop Now</span>
                 <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>

@@ -29,25 +29,39 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   };
 
   const oneSize = product.sizes.length === 1;
+  /** Hoodie cards zoom into the garment on hover; other categories swap to the second image. */
+  const zoomOnHover = product.category === 'hoodies';
 
   return (
     <div className="group relative" onMouseLeave={() => setQuickOpen(false)}>
       <div className="relative aspect-[4/5] overflow-hidden bg-mist">
         <Link to={`/products/${product.slug}`} aria-label={product.name}>
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            loading={priority ? 'eager' : 'lazy'}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
-          />
-          {product.images[1] && (
+          {zoomOnHover ? (
+            // Hoodies: one shot of the garment; hover zooms into the back print instead of swapping images.
             <img
-              src={product.images[1]}
-              alt=""
-              aria-hidden
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              src={product.images[0]}
+              alt={product.name}
+              loading={priority ? 'eager' : 'lazy'}
+              className="absolute inset-0 w-full h-full object-cover origin-[56%_34%] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.22] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             />
+          ) : (
+            <>
+              <img
+                src={product.images[0]}
+                alt={product.name}
+                loading={priority ? 'eager' : 'lazy'}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+              />
+              {product.images[1] && (
+                <img
+                  src={product.images[1]}
+                  alt=""
+                  aria-hidden
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                />
+              )}
+            </>
           )}
         </Link>
 
