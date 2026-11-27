@@ -47,9 +47,6 @@ export type Product = {
   createdAt: string;
 };
 
-const img = (id: string, w = 1000) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-
 /** Main + hover/second image for a product: public/products/<slug>/1.webp, 2.webp. */
 const productImages = (slug: string) => [`/products/${slug}/1.webp`, `/products/${slug}/2.webp`];
 
@@ -296,8 +293,15 @@ export const LIFESTYLE = {
   jackets: { webp: '/categories/jackets.webp', jpg: '/categories/jackets.jpg', alt: 'Rider in a black and red riding jacket crouching by a Royal Enfield on a rainy night street', position: 'object-[64%_25%]' },
   ridingGear: { webp: '/categories/riding-gear.webp', jpg: '/categories/riding-gear.jpg', alt: 'Rider in full Prime riding gear on a Royal Enfield through misty tea country', position: 'object-[40%_35%]' },
   accessories: { webp: '/categories/accessories.webp', jpg: '/categories/accessories.jpg', alt: 'Flat lay of a Prime cap, riding gloves, beanie, neck gaiter and key tag', position: 'object-[50%_40%]' },
-  // Still an Unsplash stand-in (community banner); swap for a client shot when available.
-  community: img('1622185135505-2d795003994a', 1600),
+  // "Dressed for the ride" community banner: client-supplied "Misty Tea Hills Motorcycle Sunset" (public/lifestyle/).
+  // Mobile/tablet crop keeps the left group of riders and bikes.
+  community: {
+    webp: '/lifestyle/misty-tea-hills.webp',
+    jpg: '/lifestyle/misty-tea-hills.jpg',
+    mobileWebp: '/lifestyle/misty-tea-hills-mobile.webp',
+    mobileJpg: '/lifestyle/misty-tea-hills-mobile.jpg',
+    alt: 'Three riders with their motorcycles, including a green Kawasaki Ninja, on a road through misty tea hills at sunset',
+  },
 };
 
 export function getProduct(slug: string): Product | undefined {

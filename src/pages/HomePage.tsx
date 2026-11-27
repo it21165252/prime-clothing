@@ -280,8 +280,19 @@ export default function HomePage() {
       {/* Community banner */}
       <section className="mx-auto max-w-[1600px] px-4 md:px-8 pt-16 md:pt-24">
         <Link to="/collections/all" className="group relative block h-[420px] md:h-[520px] overflow-hidden bg-ink">
-          <img src={LIFESTYLE.community} alt="Classic motorcycle on an open road" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-black/35" />
+          <picture>
+            <source media="(max-width: 1023px)" srcSet={LIFESTYLE.community.mobileWebp} type="image/webp" />
+            <source media="(max-width: 1023px)" srcSet={LIFESTYLE.community.mobileJpg} type="image/jpeg" />
+            <source srcSet={LIFESTYLE.community.webp} type="image/webp" />
+            <img
+              src={LIFESTYLE.community.jpg}
+              alt={LIFESTYLE.community.alt}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover object-[55%_70%] lg:object-[50%_72%] transition-transform duration-700 group-hover:scale-105"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.4),transparent_70%)]" />
           <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-6">
             <p className="label mb-4">Prime Racing x Prime Clothing</p>
             <h2 className="font-display text-5xl md:text-8xl font-extrabold">Dressed for the ride</h2>
